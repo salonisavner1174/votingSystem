@@ -18,6 +18,7 @@
                         $election_id = $data['id'];
                         $election_topic = $data['election_topic'];    
                 ?>
+                    <div style="overflow-x:auto;">
                         <table class="table">
                             <thead>
                                 <tr>
@@ -55,6 +56,7 @@
                             </tbody>
 
                         </table>
+                    </div>
                 <?php
                     
                     }
@@ -74,6 +76,7 @@
                 {
                     $sno = 1;
             ?>
+            <div style="overflow-x:auto;">
                     <table class="table">
                         <tr>
                             <th>S.No</th>
@@ -135,7 +138,7 @@
 
                 ?>
             </table>
-            
+                </div>
         </div>
     </div>
 

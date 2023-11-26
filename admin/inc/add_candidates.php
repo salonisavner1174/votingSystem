@@ -100,60 +100,62 @@
 
     <div class="col-8">
         <h3>Candidate Details</h3>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">S.No</th>
-                    <th scope="col">Photo</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Details</th>
-                    <th scope="col">Election</th>
-                    <th scope="col">Action </th>
-                    
-                </tr>
-            </thead>
-            <tbody>
-                <?php 
-                    $fetchingData = mysqli_query($db, "SELECT * FROM candidate_details") or die(mysqli_error($db)); 
-                    $isAnyCandidateAdded = mysqli_num_rows($fetchingData);
+        <div style="overflow-x:auto;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">S.No</th>
+                        <th scope="col">Photo</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Details</th>
+                        <th scope="col">Election</th>
+                        <th scope="col">Action </th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                        $fetchingData = mysqli_query($db, "SELECT * FROM candidate_details") or die(mysqli_error($db)); 
+                        $isAnyCandidateAdded = mysqli_num_rows($fetchingData);
 
-                    if($isAnyCandidateAdded > 0)
-                    {
-                        $sno = 1;
-                        while($row = mysqli_fetch_assoc($fetchingData))
+                        if($isAnyCandidateAdded > 0)
                         {
-                            $election_id = $row['election_id'];
-                            $fetchingElectionName = mysqli_query($db, "SELECT * FROM elections WHERE id = '". $election_id ."'") or die(mysqli_error($db));
-                            $execFetchingElectionNameQuery = mysqli_fetch_assoc($fetchingElectionName);
-                            $election_name = $execFetchingElectionNameQuery['election_topic'];
+                            $sno = 1;
+                            while($row = mysqli_fetch_assoc($fetchingData))
+                            {
+                                $election_id = $row['election_id'];
+                                $fetchingElectionName = mysqli_query($db, "SELECT * FROM elections WHERE id = '". $election_id ."'") or die(mysqli_error($db));
+                                $execFetchingElectionNameQuery = mysqli_fetch_assoc($fetchingElectionName);
+                                $election_name = $execFetchingElectionNameQuery['election_topic'];
 
-                            $candidate_photo = $row['candidate_photo'];
+                                $candidate_photo = $row['candidate_photo'];
 
-                ?>
-                            <tr>
-                                <td><?php echo $sno++; ?></td>
-                                <td> <img src="<?php echo $candidate_photo; ?>" class="candidate_photo" />    </td>
-                                <td><?php echo $row['candidate_name']; ?></td>
-                                <td><?php echo $row['candidate_details']; ?></td>
-                                <td><?php echo $election_name; ?></td>
-                                <td> 
-                                    <a href="index.php?editCandidatePage=1&candidateId=<?php echo $row['id'] ?>" class="btn btn-sm btn-warning"> Edit </a>
-                                        <button class="btn btn-sm btn-danger" onclick="DeleteData(<?php echo  $row['id']; ?>)"> Delete </button>
+                    ?>
+                                <tr>
+                                    <td><?php echo $sno++; ?></td>
+                                    <td> <img src="<?php echo $candidate_photo; ?>" class="candidate_photo" />    </td>
+                                    <td><?php echo $row['candidate_name']; ?></td>
+                                    <td><?php echo $row['candidate_details']; ?></td>
+                                    <td><?php echo $election_name; ?></td>
+                                    <td> 
+                                        <a href="index.php?editCandidatePage=1&candidateId=<?php echo $row['id'] ?>" class="btn btn-sm btn-warning"> Edit </a>
+                                            <button class="btn btn-sm btn-danger" onclick="DeleteData(<?php echo  $row['id']; ?>)"> Delete </button>
+                                        </td>
                                     </td>
-                                </td>
-                            </tr>   
+                                </tr>   
+                    <?php
+                            }
+                        }else {
+                ?>
+                            <tr> 
+                                <td colspan="7"> No any candidate is added yet. </td>
+                            </tr>
                 <?php
                         }
-                    }else {
-            ?>
-                        <tr> 
-                            <td colspan="7"> No any candidate is added yet. </td>
-                        </tr>
-            <?php
-                    }
-                ?>
-            </tbody>    
-        </table>
+                    ?>
+                </tbody>    
+            </table>
+        </div>
     </div>
 </div>
 

@@ -80,7 +80,7 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `contact_no`, `password`, `user_role`) VALUES (2, 'Admin', '9876543210', 'a29c57c6894dee6e8251510d58c07078ee3f49bf', 'Admin');
+INSERT INTO `users` (`id`, `username`, `contact_no`, `password`, `user_role`) VALUES (1, 'Admin', '9876543210', 'a29c57c6894dee6e8251510d58c07078ee3f49bf', 'Admin');
 
 -- --------------------------------------------------------
 
